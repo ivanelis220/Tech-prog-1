@@ -1,7 +1,7 @@
 ﻿#pragma once
-#include "Tray.h"
-#include "Sail.h"
-#include "Boat.h"
+#include "submarine.h"
+#include "sail.h"
+#include "boat.h"
 #include <fstream>
 
 class Keeper
