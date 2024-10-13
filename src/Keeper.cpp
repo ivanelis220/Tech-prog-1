@@ -21,15 +21,15 @@ void Keeper::add()
 	int type; // Тип наследника
 	try
 	{
-		cout << "Выберите класс: " << endl
-			<< "[1] Лодка" << endl
-			<< "[2] Парусник" << endl
-			<< "[3] Катер" << endl
-			<< "Ваш выбор: ";
+		cout << "Select a class: " << endl
+			<< "[1] The submarine" << endl
+			<< "[2] The sailboat" << endl
+			<< "[3] The boat" << endl
+			<< "Your choise: ";
 		cin >> type;
 		if (type > 3 || type < 1)
 		{
-			throw (string)"Выбран не правильный класс";
+			throw (string)"The wrong class is selected";
 		}
 		Ship** tmp = new Ship * [size + 1];
 		for (int i = 0; i < size; i++)
@@ -39,7 +39,7 @@ void Keeper::add()
 		switch (type)
 		{
 		case 1:
-			tmp[size] = new Tray;
+			tmp[size] = new Submarine;
 			break;
 		case 2:
 			tmp[size] = new Sail;
@@ -52,7 +52,7 @@ void Keeper::add()
 		}
 		if (tmp[size]->isError())
 		{
-			cout << "Элемент не был добавлен" << endl;
+			cout << "The item was not added" << endl;
 			system("pause");
 			return;
 		}
@@ -60,7 +60,7 @@ void Keeper::add()
 		if (data)
 			delete[] data;
 		data = tmp;
-		cout << "Элемент успешно добавлен" << endl;
+		cout << "The item has been added successfully" << endl;
 		system("pause");
 	}
 	catch (string err)
@@ -80,7 +80,7 @@ void Keeper::add(int _type, ifstream &fin)
 	switch (_type)
 	{
 	case 1:
-		tmp[size] = new Tray(fin);
+		tmp[size] = new Submarine(fin);
 		break;
 	case 2:
 		tmp[size] = new Sail(fin);
@@ -102,7 +102,7 @@ void Keeper::edit()
 	int index;
 	if (!size)
 	{
-		cout << "[INFO] Контейнер пуст!" << endl;
+		cout << "[INFO] The container is empty!" << endl;
 		system("pause");
 		return;
 	}
@@ -114,30 +114,30 @@ void Keeper::edit()
 			switch (data[i]->getType())
 			{
 			case 1:
-				cout << "Подводная лодка" << endl;
+				cout << "Submarine" << endl;
 				break;
 			case 2:
-				cout << "Парусник" << endl;
+				cout << "Sailboat" << endl;
 				break;
 			case 3:
-				cout << "Катер" << endl;
+				cout << "Boat" << endl;
 				break;
 			default:
 				break;
 			}
 		}
-		cout << "Выберите элемент для именения: ";
+		cout << "Select the element to change: ";
 		cin >> index;
 		if (index < 0 || index > size - 1)
-			throw (string)"Выбранного элемента не существует";
+			throw (string)"The selected item does not exist";
 		data[index]->edit();
 		if (data[index]->isError())
 		{
-			cout << "Элемент не изменен из-за ошибки" << endl;
+			cout << "The element has not been changed due to an error" << endl;
 		}
 		else
 		{
-			cout << "Элемент изменен успешно" << endl;
+			cout << "The item has been changed successfully" << endl;
 		}
 		system("pause");
 	}
@@ -153,7 +153,7 @@ void Keeper::del()
 	int index;
 	if (!size)
 	{
-		cout << "[INFO] Контейнер пуст!" << endl;
+		cout << "[INFO] The container is empty!" << endl;
 		system("pause");
 		return;
 	}
@@ -165,27 +165,27 @@ void Keeper::del()
 			switch (data[i]->getType())
 			{
 			case 1:
-				cout << "Подводная лодка" << endl;
+				cout << "Submarine" << endl;
 				break;
 			case 2:
-				cout << "Парусник" << endl;
+				cout << "Sailboat" << endl;
 				break;
 			case 3:
-				cout << "Катер" << endl;
+				cout << "Boat" << endl;
 				break;
 			default:
 				break;
 			}
 		}
-		cout << "Выберите элемент для удаления: ";
+		cout << "Select the item to delete: ";
 		cin >> index;
 		if (index < 0 || index > size - 1)
-			throw (string)"Выбранного элемента не существует";
+			throw (string)"The selected item does not exist";
 		if (size == 1)
 		{
 			delete[] data;
 			data = nullptr;
-			cout << "Элемент удален успешно" << endl;
+			cout << "The item was deleted successfully" << endl;
 			size--;
 			system("pause");
 			return;
@@ -201,7 +201,7 @@ void Keeper::del()
 		delete[] data;
 		data = tmp;
 		size--;
-		cout << "Элемент удален успешно" << endl;
+		cout << "The item was deleted successfully" << endl;
 		system("pause");
 	}
 	catch (string err)
@@ -218,7 +218,7 @@ void Keeper::save()
 		data[i]->save(fout);
 	}
 	fout.close();
-	cout << "Элементы успешно сохранены в файл" << endl;
+	cout << "The items have been successfully saved to a file" << endl;
 	system("pause");
 }
 
@@ -227,7 +227,7 @@ void Keeper::load()
 	ifstream fin("output.txt");
 	if(fin.fail())
 	{
-		cout << "Файл пустой!" << endl;
+		cout << "The file is empty!" << endl;
 		system("pause");
 		return;
 	}
@@ -242,14 +242,14 @@ void Keeper::load()
 		add(type, fin);
 	}
 	fin.close();
-	cout << "Элементы успешно загружены из файла" << endl;
+	cout << "The items were successfully loaded from the file" << endl;
 	system("pause");
 }
 ostream& operator<<(ostream& out, Keeper& obj)
 {
 	if (!obj.size)
 	{
-		cout << "[INFO] Контейнер пуст!" << endl;
+		cout << "[INFO] The container is empty!" << endl;
 		system("pause");
 		return out;
 	}

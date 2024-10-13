@@ -1,46 +1,46 @@
-#include "tray.h"
+#include "submarine.h"
 
-Tray::Tray()
+Submarine::Submarine()
 {
-	cout << "----------------------------------\n   Добавление подводной лодки\n----------------------------------" << endl << endl;
+	cout << "SUBMARINE" << endl;
 	try
 	{
 		setType(1);
-		cout << "Введите длину лодки = ";
+		cout << "Enter the length of the submarine = ";
 		cin >> this->length;
 		if (!this->length || this->length < 0)
 		{
-			throw (string)"Длина лодки равна нулю или отрицательна";
+			throw (string)"The length of the submarine is zero or negative";
 		}
-		cout << "Введите ширину лодки = ";
+		cout << "Enter the width of the submarine = ";
 		cin >> this->wigth;
 		if (!this->wigth || this->wigth < 0)
 		{
-			throw (string)"Ширина лодки равна нулю или отрицательна";
+			throw (string)"The width of the submarine is zero or negative";
 		}
-		cout << "Введите количество экипажа = ";
+		cout << "Enter the amount of crew = ";
 		cin >> this->people;
 		if (this->people < 0)
 		{
-			throw (string)"Количество экипажа не может быть отрицательным";
+			throw (string)"The amount of crew is zero or negative";
 		}
-		cout << "Введите количество времени проведенного под водой = ";
+		cout << "Enter the amount of time spent underwater = ";
 		cin >> this->time;
 		if (this->time < 0)
 		{
-			throw (string)"Время не может быть отрицательным";
+			throw (string)"Time can't be negative";
 		}
-		cout << "Введите скорость лодки = ";
+		cout << "Enter the speed of the submarine = ";
 		cin >> this->speed;
 		if (this->speed < 0)
 		{
-			throw (string)"Скорость не может быть отрицательным";
+			throw (string)"Speed cannot be negative";
 		}
 		cin.ignore(256, '\n');
-		cout << "Введите вооружение лодки : ";
+		cout << "Enter the boat's armament : ";
 		getline(cin, this->arms);
 		if(arms == "")
-			throw (string)"Вооружение не может быть пустым";
+			throw (string)"The armament can't be empty";
 		setError(false);
 	}
 	catch (string err)
@@ -50,7 +50,7 @@ Tray::Tray()
 	}
 }
 
-Tray::Tray(ifstream& fin)
+Submarine::Submarine(ifstream& fin)
 {
 	setType(1);
 	fin >> this->length  >> this->wigth >> this->people >> this->speed >> this->time;
@@ -58,92 +58,92 @@ Tray::Tray(ifstream& fin)
 	getline(fin, arms);
 }
 
-Tray::~Tray()
+Submarine::~Submarine()
 {
-	cout << "Был вызван деструктор класса Tray" << endl;
+	cout << "The destructor of the submarine class was called" << endl;
 	system("pause");
 }
 
-void Tray::edit()
+void Submarine::edit()
 {
 	try
 	{
 		int index;
 		int iTmp;
 		string sTmp;
-		cout << "Выберите параметр для изменения:" << endl
-			<< "[1] Длина" << endl
-			<< "[2] Ширина" << endl
-			<< "[3] Экипаж" << endl
-			<< "[4] Скорость" << endl
-			<< "[5] Время под водой" << endl
-			<< "[6] Вооружение" << endl
-			<< "Ваш выбор: ";
+		cout << "Select an option to change:" << endl
+			<< "[1] Length" << endl
+			<< "[2] Width" << endl
+			<< "[3] Crew" << endl
+			<< "[4] Speed" << endl
+			<< "[5] Time underwater" << endl
+			<< "[6] Armament" << endl
+			<< "Your choise: ";
 		cin >> index;
 		if (index < 1 || index > 6)
 		{
-			throw (string)"Параметра с данным индексом не существует";
+			throw (string)"There is no parameter with this index";
 		}
-		cout << "Исходное значение: ";
+		cout << "The original value: ";
 		switch (index)
 		{
 		case 1:
 			cout << length << endl;
-			cout << "Новое значение: ";
+			cout << "New value: ";
 			cin >> iTmp;
 			if (!iTmp || iTmp < 0)
 			{
-				throw (string)"Длина лодки равна нулю или отрицательна";
+				throw (string)"The length of the submarine is zero or negative";
 			}
 			length = iTmp;
 			break;
 		case 2:
 			cout << wigth << endl;
-			cout << "Новое значение: ";
+			cout << "New value: ";
 			cin >> iTmp;
 			if (!iTmp || iTmp < 0)
 			{
-				throw (string)"Ширина лодки равна нулю или отрицательна";
+				throw (string)"The width of the submarine is zero or negative";
 			}
 			wigth = iTmp;
 			break;
 		case 3:
 			cout << people << endl;
-			cout << "Новое значение: ";
+			cout << "New value: ";
 			cin >> iTmp;
 			if (iTmp < 0)
 			{
-				throw (string)"Количество экипажа не может быть отрицательным";
+				throw (string)"The amount of crew is zero or negative";
 			}
 			people = iTmp;
 			break;
 		case 4:
 			cout << speed << endl;
-			cout << "Новое значение: ";
+			cout << "New value: ";
 			cin >> iTmp;
 			if (iTmp < 0)
 			{
-				throw (string)"Скорость не может быть отрицательным";
+				throw (string)"The speed can't be negative";
 			}
 			speed = iTmp;
 			break;
 		case 5:
 			cout << time << endl;
-			cout << "Новое значение: ";
+			cout << "New value: ";
 			cin >> iTmp;
 			if (iTmp < 0)
 			{
-				throw (string)"Время не может быть отрицательным";
+				throw (string)"The time can't be negative";
 			}
 			time = iTmp;
 			break;
 		case 6:
 			cout << arms << endl;
-			cout << "Новое значение: ";
+			cout << "New value: ";
 			cin.ignore(256, '\n');
 			getline(cin, sTmp);
 			if(sTmp == "")
-				throw (string)"Вооружение не может быть пустым";
+				throw (string)"The armament can't be empty";
 			arms = sTmp;
 			break;
 		default:
@@ -158,7 +158,7 @@ void Tray::edit()
 	}
 }
 
-void Tray::save(ofstream& fout)
+void Submarine::save(ofstream& fout)
 {
 	fout << getType() << endl
 		<< this->length << endl
@@ -169,13 +169,13 @@ void Tray::save(ofstream& fout)
 		<< this->arms << endl;
 }
 
-void Tray::print(ostream& out)
+void Submarine::print(ostream& out)
 {
-	out << "----------------------------------\n    Подводная лодка    \n----------------------------------" << endl
-		<< "Длина лодки : " << length << endl
-		<< "Ширина лодки : " << wigth << endl
-		<< "Экипаж : " << people << endl
-		<< "Время под водой : " << time << endl
-		<< "Скорость : " << speed << endl
-		<< "Вооружение : " << arms << endl;
+	out << "SUBMARINE" << endl
+		<< "The length : " << length << endl
+		<< "The width : " << wigth << endl
+		<< "The crew : " << people << endl
+		<< "The underwater time : " << time << endl
+		<< "The speed : " << speed << endl
+		<< "The armament : " << arms << endl;
 }

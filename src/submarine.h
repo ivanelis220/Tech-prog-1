@@ -1,7 +1,7 @@
 #pragma once
 #include "ship.h"
 
-class Tray : public Ship
+class Submarine : public Ship
 {
 	int length;
 	int wigth;
@@ -10,9 +10,9 @@ class Tray : public Ship
 	int speed;
 	string arms;
 public:
-	Tray();
-	Tray(ifstream &fin);
-	~Tray();
+	Submarine();
+	Submarine(ifstream &fin);
+	~Submarine();
 	void edit();
 	void save(ofstream& fout);
 	void print(ostream& out);

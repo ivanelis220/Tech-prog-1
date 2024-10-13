@@ -2,36 +2,36 @@
 
 Boat::Boat()
 {
-	cout << "Катер" <<endl;
+	cout << "BOAT" <<endl;
 	try
 	{
 		setType(3);
-		cout << "Введите материал корпуса катера = ";
+		cout << "Enter the hull material of the boat = ";
 		cin.ignore(256, '\n');
 		getline(cin, material);
 		if(material == "")
-			throw (string)"Материал не может быть пустым";
-		cout << "Введите ходовые качества = ";
+			throw (string)"The material cannot be empty";
+		cout << "Enter driving characteristics = ";
 		getline(cin, _class);
 		if (_class == "")
-			throw (string)"Ходовые качества не могут быть пустыми";
-		cout << "Введите количество экипажа = ";
+			throw (string)"Driving qualities cannot be empty";
+		cout << "Enter the number of crew = ";
 		cin >> this->people;
 		if (this->people < 0)
 		{
-			throw (string)"Количество экипажа не может быть отрицательным";
+			throw (string)"The number of crew cannot be negative";
 		}
-		cout << "[1]Мирный или [2]Военный = ";
+		cout << "[1]Peaceful или [2]Military = ";
 		cin >> this->destination;
 		if (this->destination < 1 || this->destination > 2)
 		{
-			throw (string)"Неверное назначение парусника";
+			throw (string)"The wrong purpose of the sailboat";
 		}
-		cout << "Введите скорость парусника = ";
+		cout << "Enter the speed of the sailboat = ";
 		cin >> this->speed;
 		if (this->speed < 0)
 		{
-			throw (string)"Скорость не может быть отрицательна";
+			throw (string)"The speed cannot be negative";
 		}
 		setError(false);
 	}
@@ -55,7 +55,7 @@ Boat::Boat(ifstream& fin)
 
 Boat::~Boat()
 {
-	cout << "Был вызван деструктор класса Boat" << endl;
+	cout << "The destructor of the Boat class was called" << endl;
 }
 
 void Boat::edit()
@@ -65,73 +65,73 @@ void Boat::edit()
 		int index;
 		int iTmp;
 		string sTmp;
-		cout << "Выберите параметр для изменения:" << endl
-			<< "[1] Материал" << endl
-			<< "[2] Ходовые качества" << endl
-			<< "[3] Экипаж" << endl
-			<< "[4] Назначение" << endl
-			<< "[5] Скорость" << endl
-			<< "Ваш выбор: ";
+		cout << "Select an option to change:" << endl
+			<< "[1] The materials" << endl
+			<< "[2] Driving qualities" << endl
+			<< "[3] The crew" << endl
+			<< "[4] The purpose" << endl
+			<< "[5] The speed" << endl
+			<< "Your choise: ";
 		cin >> index;
 		if (index < 1 || index > 6)
 		{
-			throw (string)"Параметра с данным индексом не существует";
+			throw (string)"There is no parameter with this index";
 		}
-		cout << "Исходное значение: ";
+		cout << "The original value: ";
 		switch (index)
 		{
 		case 1:
 			cout << material << endl;
-			cout << "Новое значение: ";
+			cout << "The new value: ";
 			cin.ignore(256, '\n');
 			getline(cin, sTmp);
 			if (sTmp == "")
-				throw (string)"Материал не может быть пустым";
+				throw (string)"The material can't be empty";
 			material = sTmp;
 			break;
 		case 2:
 			cout << _class << endl;
-			cout << "Новое значение: ";
+			cout << "The new value: ";
 			cin.ignore(256, '\n');
 			getline(cin, sTmp);
 			if (sTmp == "")
-				throw (string)"Ходовые качества не могут быть пустыми";
+				throw (string)"Driving qualities can't be empty";
 			_class = sTmp;
 			break;
 		case 3:
 			cout << people << endl;
-			cout << "Новое значение: ";
+			cout << "The new value: ";
 			cin >> iTmp;
 			if (iTmp < 0)
 			{
-				throw (string)"Количество экипажа не может быть отрицательным";
+				throw (string)"The amount of the crew can't be negative";
 			}
 			people = iTmp;
 			break;
 		case 4:
 			if (destination == 1)
 			{
-				cout << "Мирный" << endl;
+				cout << "Peaceful" << endl;
 			}
 			else
 			{
-				cout << "Военный" << endl;
+				cout << "<Military" << endl;
 			}
-			cout << "Новое значение [1/2]: ";
+			cout << "The new value [1/2]: ";
 			cin >> iTmp;
 			if (iTmp < 1 || iTmp > 2)
 			{
-				throw (string)"Назначение должно быть [1/2]";
+				throw (string)"The purpose should be [1/2]";
 			}
 			destination = iTmp;
 			break;
 		case 5:
 			cout << speed << endl;
-			cout << "Новое значение: ";
+			cout << "The new value: ";
 			cin >> iTmp;
 			if (iTmp < 0)
 			{
-				throw (string)"Скорость не может быть отрицательным";
+				throw (string)"The speed can't be negative";
 			}
 			speed = iTmp;
 			break;
@@ -159,17 +159,17 @@ void Boat::save(ofstream& fout)
 
 void Boat::print(ostream& out)
 {
-	out << "----------------------------------\n        Катер        \n----------------------------------" << endl;
+	out << "BOAT" << endl;
 	if (this->destination == 1)
 	{
-		out << "Назначение : Мирный" << endl;
+		out << "The purpose : Peaceful" << endl;
 	}
 	else
 	{
-		out << "Назначение : Военный" << endl;
+		out << "The purpose : Military" << endl;
 	}
-	out << "Материал : " << this->material << endl
-		<< "Скорость : " << this->speed << endl
-		<< "Экипаж : " << this->people << endl
-		<< "Ходовые качества : " << this->_class << endl;
+	out << "The material : " << this->material << endl
+		<< "The speed : " << this->speed << endl
+		<< "The crew : " << this->people << endl
+		<< "Driving qualities : " << this->_class << endl;
 }
